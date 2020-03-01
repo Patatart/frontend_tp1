@@ -33,19 +33,19 @@
     </v-app-bar>
 
     <v-content>
-      <Login/>
+      <Home/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import Login from './components/Login'
+import Home from './views/Home'
 
 export default {
   name: 'App',
 
   components: {
-    Login
+    Home
   },
 
   data: () => ({
