@@ -38,16 +38,19 @@ export default {
     email: '',
     password: '',
     emailRules: [
-      v => !!v || 'Email is required',
-      v => v !== 'Louis' || 'Louis is forbidden'
+      v => !!v || 'Email is required'
     ],
     passwordRules: [
       v => !!v || 'Password is required'
     ]
   }),
   methods: {
-    login () {
-      console.log('login')
+    async login () {
+      const axios = require('axios')
+      await axios.post('http://localhost:3000/api/v1/login', {
+        username: this.email, // 'admin@example.com',
+        password: this.password // 'pxHzOLb1UH'
+      })
     }
   }
 }

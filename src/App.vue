@@ -30,6 +30,10 @@
 
       <v-spacer></v-spacer>
 
+      <v-btn
+        @click="login">
+        Log In
+      </v-btn>
     </v-app-bar>
 
     <v-content>
@@ -50,6 +54,15 @@ export default {
 
   data: () => ({
     //
-  })
+  }),
+  methods: {
+    async login () {
+      const axios = require('axios')
+      await axios.post('http://localhost:3000/api/v1/login', {
+        username: 'admin@example.com',
+        password: 'pxHzOLb1UH'
+      })
+    }
+  }
 }
 </script>
