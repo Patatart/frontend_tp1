@@ -63,7 +63,7 @@ export default {
       const axios = require('axios')
       await axios.post('http://localhost:3000/api/v1/exercise', {
         instructions: this.instructions,
-        lang: 'pyhton',
+        lang: 'python',
         title: this.title,
         tests: '',
         solution: '',
