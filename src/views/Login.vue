@@ -14,12 +14,13 @@
           <v-text-field
             v-model="password"
             :rules="passwordRules"
+            type="password"
             label="Password"
             required>
           </v-text-field>
           <div class="my-2">
             <v-btn color="primary"
-              @click="login">
+              @click="triggerLogin">
               Log In
             </v-btn>
           </div>
@@ -30,6 +31,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'Login',
   data: () => ({
@@ -45,12 +48,17 @@ export default {
     ]
   }),
   methods: {
-    async login () {
-      const axios = require('axios')
-      await axios.post('http://localhost:3000/api/v1/login', {
-        username: this.email, // 'admin@example.com',
-        password: this.password // 'pxHzOLb1UH'
-      })
+    ...mapActions('user', ['login']),
+    async triggerLogin () {
+      try {
+        await this.login({
+          email: this.email,
+          password: this.password
+        })
+        this.$router.push('/')
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 }

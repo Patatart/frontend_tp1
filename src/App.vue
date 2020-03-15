@@ -6,7 +6,7 @@
       dark
     >
       <div class="d-flex align-center">
-        <h1>TP1</h1>
+        <h1>TP2</h1>
       </div>
       <!--div class="d-flex align-center">
         <v-img
@@ -29,40 +29,29 @@
       </div-->
 
       <v-spacer></v-spacer>
-
-      <v-btn
-        @click="login">
-        Log In
-      </v-btn>
     </v-app-bar>
 
-    <v-content>
-      <Home/>
+       <v-content>
+      <transition>
+      <keep-alive>
+        <router-view>
+        </router-view>
+      </keep-alive>
+    </transition>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import Home from './views/Home'
 
 export default {
   name: 'App',
 
   components: {
-    Home
   },
 
   data: () => ({
     //
-  }),
-  methods: {
-    async login () {
-      const axios = require('axios')
-      await axios.post('http://localhost:3000/api/v1/login', {
-        username: 'admin@example.com',
-        password: 'pxHzOLb1UH'
-      })
-    }
-  }
+  })
 }
 </script>

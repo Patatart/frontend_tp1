@@ -1,48 +1,52 @@
-// import Vue from 'vue'
+import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Courses from '../views/Courses.vue'
 import Login from '../views/Login.vue'
-import axios from 'axios'
+import Module from '../views/Module.vue'
+import store from '../store/index'
 
-function createRouter (state) {
-  async function beforeEnter (to, from, next) {
-    try {
-      const { data: user } = await axios.get('/api/me')
-      state.user = user
-      next()
-    } catch (err) {
-      console.log('err', err)
-      next('/login')
-    }
+Vue.use(VueRouter)
+
+async function beforeEnter (_to, _from, next) {
+  if (!store.getters['user/isAuthenticated']) {
+    await store.dispatch('user/fetchUser')
   }
-
-  // Vue.use(VueRouter)
-
-  const routes = [
-    {
-      path: '/',
-      name: 'Home',
-      component: Home,
-      beforeEnter
-    },
-    {
-      path: '/about',
-      name: 'About',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-    },
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login
-    }
-  ]
-
-  return new VueRouter({
-    routes
-  })
+  if (store.getters['user/isAuthenticated']) {
+    next()
+    return
+  }
+  next('/login')
 }
 
-export default createRouter
+const routes = [
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: Home,
+    beforeEnter
+  },
+  {
+    path: '/',
+    name: 'Courses',
+    component: Courses,
+    beforeEnter
+  },
+  {
+    path: '/module/:id',
+    name: 'Module',
+    component: Module,
+    beforeEnter
+  }
+]
+
+const router = new VueRouter({
+  routes
+})
+
+export default router
