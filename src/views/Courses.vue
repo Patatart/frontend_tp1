@@ -18,7 +18,7 @@
                      {{ session.name }}
                   </v-card-title>
                   <v-card-text>
-                     ne rien mettre ici
+                     Texte
                   </v-card-text>
                </v-card>
             </v-row>

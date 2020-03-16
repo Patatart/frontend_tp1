@@ -1,10 +1,11 @@
 <template>
    <v-layout column justify-center align-center>
+     <h1>{{ module.name }}</h1>
       <v-row xs12 sm8 md12 style="max-width: 88rem">
          <v-col v-for="module in modules" :key="module.id" cols="12">
             <h2>
-               <router-link :to="`/module/${module.id}`">
-               {{ module.name }}
+               <router-link :to="`/session/${session.id}`">
+               {{ session.name }}
                </router-link>
             </h2>
             <v-row justify="start">
@@ -12,13 +13,13 @@
                class="ma-2"
                height="8em"
                width="16em"
-               v-for="session in getSessionsByModuleId(module.id)"
-               :key="session.id">
+               v-for="exercise in getExercisesBySessionId(session.id)"
+               :key="exercise.id">
                   <v-card-title class="subtitle-1">
-                     {{ session.name }}
+                     {{ exercises.title }}
                   </v-card-title>
                   <v-card-text>
-                     ne rien mettre ici
+                     Text
                   </v-card-text>
                </v-card>
             </v-row>

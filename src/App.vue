@@ -6,7 +6,7 @@
       dark
     >
       <div class="d-flex align-center">
-        <h1>TP2</h1>
+        <h1>Hephaïstos</h1>
       </div>
       <!--div class="d-flex align-center">
         <v-img
